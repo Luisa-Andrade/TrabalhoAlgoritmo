@@ -111,7 +111,8 @@ void menuPrincipal() {
         cout << "2. Lista Ordenada\n";
         cout << "3. Pilha\n";
         cout << "4. Fila\n";
-        cout << "5. Sair\n";
+        cout << "5. Arvore de busca Binaria\n";
+        cout << "6. Sair/n";
         cout << "Escolha uma opção: ";
         cin >> opcao;
         limparBuffer();

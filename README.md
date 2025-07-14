@@ -6,7 +6,7 @@ IPRJ
 
 ## Grupo
 
-Alunos: Luisa de Andrade Lacave, Renan Thurler da Silva, Jõao Henrique, Victor
+Alunos: Luisa de Andrade Lacave, Renan Thurler da Silva, Jõao Henrique, Victor , Felipe Anderson Arcanjo Rodrigues
 
 GitHub: Luisa-Andrade
 
