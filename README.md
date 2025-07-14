@@ -6,7 +6,7 @@ IPRJ
 
 ## Grupo
 
-Aluna: Luisa de Andrade Lacave
+Alunos: Luisa de Andrade Lacave, Renan Thurler da Silva, Jõao Henrique, Victor
 
 GitHub: Luisa-Andrade
 
