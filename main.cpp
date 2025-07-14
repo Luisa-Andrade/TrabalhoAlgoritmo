@@ -5,6 +5,11 @@
 #include "include/Pilha.h"
 #include "include/FilaBasica.h"
 #include "include/FilaCircular.h"
+#include "include/PilhaEncadeada.h"           
+#include "include/FilaEncadeada.h"            
+#include "include/ListaSimplesmenteEncadeada.h" 
+#include "include/ListaDuplamenteEncadeada.h"        
+#include "include/ListaDuplamenteEncadeadaCircular.h" 
 #include <iostream>
 #include <limits>
 #include <string>
@@ -19,6 +24,14 @@ Pilha pilha;
 FilaBasica filaB;
 FilaCircular filaC;
 
+PilhaEncadeada pilhaEnc;
+FilaEncadeada filaEnc;
+ListaSimplesmenteEncadeada listaSenc;
+ListaDuplamenteEncadeada listaDupEnc;             
+ListaDuplamenteEncadeadaCircular listaDupEncCirc;
+
+
+
 // Protótipos
 void limparBuffer();
 void menuPrincipal();
@@ -28,6 +41,13 @@ void menuPilha();
 void menuFila();
 bool idExiste(int id);
 Elemento* criarElementoComIdValido(int tipo);
+
+void menuEncadeadas();
+void menuPilhaEncadeada();
+void menuFilaEncadeada();
+void menuListaSimplesmenteEncadeada();
+void menuListaDuplamenteEncadeada();        
+void menuListaDuplamenteEncadeadaCircular(); 
 
 // Implementações
 
@@ -111,7 +131,8 @@ void menuPrincipal() {
         cout << "2. Lista Ordenada\n";
         cout << "3. Pilha\n";
         cout << "4. Fila\n";
-        cout << "5. Sair\n";
+        cout << "5. Estruturas Encadeadas (Parte II)\n"; 
+        cout << "6. Sair\n";                            
         cout << "Escolha uma opção: ";
         cin >> opcao;
         limparBuffer();
@@ -121,7 +142,8 @@ void menuPrincipal() {
             case 2: menuListaOrdenada(); break;
             case 3: menuPilha(); break;
             case 4: menuFila(); break;
-            case 5: cout << "Saindo...\n"; break;
+            case 5: menuEncadeadas(); break;
+            case 6: cout << "Saindo...\n"; break;
             default: cout << "Opção inválida!\n";
         }
     } while(opcao != 5);
@@ -620,6 +642,341 @@ void menuFila() {
         }
     } while(opcao != 3);
 }
+
+void menuEncadeadas() {
+    int opcao;
+    do {
+        system("cls || clear");
+        cout << "========== ESTRUTURAS ENCADEADAS (PARTE II) ==========\n";
+        cout << "1. Pilha Encadeada\n";
+        cout << "2. Fila Encadeada\n";
+        cout << "3. Lista Simplesmente Encadeada\n";
+        cout << "4. Lista Duplamente Encadeada\n";        
+        cout << "5. Lista Duplamente Encadeada Circular\n"; 
+        cout << "6. Voltar\n";
+        cout << "Escolha uma opcao: ";
+        cin >> opcao;
+        limparBuffer();
+
+        switch(opcao) {
+            case 1: menuPilhaEncadeada(); break;
+            case 2: menuFilaEncadeada(); break;
+            case 3: menuListaSimplesmenteEncadeada(); break; 
+            case 4: menuListaDuplamenteEncadeada(); break;        
+            case 5: menuListaDuplamenteEncadeadaCircular(); break; 
+            case 6: break;
+            default: cout << "Opcao invalida!\n";
+        }
+    } while(opcao != 4);
+}
+
+
+void menuPilhaEncadeada() {
+    int opcao;
+    do {
+        system("cls || clear");
+        cout << "========== PILHA ENCADEADA ==========\n";
+        cout << "1. Empilhar (Push)\n";
+        cout << "2. Desempilhar (Pop)\n";
+        cout << "3. Consultar Topo\n";
+        cout << "4. Voltar\n";
+        cout << "Escolha uma opcao: ";
+        cin >> opcao;
+        limparBuffer();
+
+        switch(opcao) {
+            case 1: {
+                int tipo;
+                cout << "1. Aluno\n2. Professor\nEscolha: ";
+                cin >> tipo;
+                limparBuffer();
+                Elemento* e = criarElementoComIdValido(tipo);
+                pilhaEnc.empilhar(e); // Usa o objeto pilhaEnc
+                cout << "Empilhado com sucesso!\n";
+                break;
+            }
+            case 2: {
+                try {
+                    pilhaEnc.desempilhar(); // Usa o objeto pilhaEnc
+                    cout << "Desempilhado com sucesso!\n";
+                } catch (const std::runtime_error& e) {
+                    cout << e.what() << endl;
+                }
+                break;
+            }
+            case 3: {
+                Elemento* topo = pilhaEnc.consultarTopo(); // Usa o objeto pilhaEnc
+                if (topo) {
+                    cout << "Elemento no topo:\n";
+                    topo->imprimirInfo();
+                } else {
+                    cout << "Pilha vazia!\n";
+                }
+                break;
+            }
+            case 4: break;
+            default: cout << "Opcao invalida!\n";
+        }
+        if (opcao != 4) {
+            cout << "\nPressione Enter para continuar...";
+            cin.get();
+        }
+    } while (opcao != 4);
+}
+
+
+void menuFilaEncadeada() {
+    int opcao;
+    do {
+        system("cls || clear");
+        cout << "========== FILA ENCADEADA ==========\n";
+        cout << "1. Enfileirar (Enqueue)\n";
+        cout << "2. Desenfileirar (Dequeue)\n";
+        cout << "3. Consultar Frente\n";
+        cout << "4. Voltar\n";
+        cout << "Escolha uma opcao: ";
+        cin >> opcao;
+        limparBuffer();
+
+        switch(opcao) {
+            case 1: {
+                int tipo;
+                cout << "1. Aluno\n2. Professor\nEscolha: ";
+                cin >> tipo;
+                limparBuffer();
+                Elemento* e = criarElementoComIdValido(tipo);
+                filaEnc.enfileirar(e); // Usa o objeto filaEnc
+                cout << "Enfileirado com sucesso!\n";
+                break;
+            }
+            case 2: {
+                try {
+                    filaEnc.desenfileirar(); // Usa o objeto filaEnc
+                    cout << "Desenfileirado com sucesso!\n";
+                } catch (const std::runtime_error& e) {
+                    cout << e.what() << endl;
+                }
+                break;
+            }
+            case 3: {
+                Elemento* frente = filaEnc.consultarInicio(); // Usa o objeto filaEnc
+                if (frente) {
+                    cout << "Elemento na frente da fila:\n";
+                    frente->imprimirInfo();
+                } else {
+                    cout << "Fila vazia!\n";
+                }
+                break;
+            }
+            case 4: break;
+            default: cout << "Opcao invalida!\n";
+        }
+        if (opcao != 4) {
+            cout << "\nPressione Enter para continuar...";
+            cin.get();
+        }
+    } while (opcao != 4);
+}
+
+void menuListaSimplesmenteEncadeada() {
+    int opcao;
+    do {
+        system("cls || clear");
+        cout << "========== LISTA SIMPLESMENTE ENCADEADA ==========\n";
+        cout << "1. Inserir no Inicio\n";
+        cout << "2. Inserir no Fim\n";
+        cout << "3. Remover Primeiro\n";
+        // Para implementar "imprimirTodos", a sua classe de lista precisa ter esse método.
+        // Assumindo que você adicionará: void imprimirTodos() const;
+        // cout << "4. Imprimir Todos\n";
+        cout << "5. Voltar\n";
+        cout << "Escolha uma opcao: ";
+        cin >> opcao;
+        limparBuffer();
+
+        switch(opcao) {
+            case 1: {
+                int tipo;
+                cout << "1. Aluno\n2. Professor\nEscolha o tipo: ";
+                cin >> tipo;
+                limparBuffer();
+                Elemento* e = criarElementoComIdValido(tipo);
+                listaSenc.inserirNoInicio(e);
+                cout << "Inserido no inicio com sucesso!\n";
+                break;
+            }
+            case 2: {
+                int tipo;
+                cout << "1. Aluno\n2. Professor\nEscolha o tipo: ";
+                cin >> tipo;
+                limparBuffer();
+                Elemento* e = criarElementoComIdValido(tipo);
+                listaSenc.inserirNoFim(e);
+                cout << "Inserido no fim com sucesso!\n";
+                break;
+            }
+            case 3: {
+                try {
+                    listaSenc.removerPrimeiro();
+                    cout << "Primeiro elemento removido com sucesso!\n";
+                } catch (const std::runtime_error& e) {
+                    cout << e.what() << endl;
+                }
+                break;
+            }
+            /* case 4:
+                cout << "--- Elementos na Lista ---\n";
+                listaSenc.imprimirTodos();
+                break;
+            */
+            case 5: break;
+            default: cout << "Opcao invalida!\n";
+        }
+        if (opcao != 5) {
+            cout << "\nPressione Enter para continuar...";
+            cin.get();
+        }
+    } while (opcao != 5);
+}
+
+
+void menuListaDuplamenteEncadeada() {
+    int opcao;
+    do {
+        system("cls || clear");
+        cout << "========== LISTA DUPLAMENTE ENCADEADA ==========\n";
+        cout << "1. Inserir no Inicio\n";
+        cout << "2. Inserir no Fim\n";
+        cout << "3. Remover Primeiro\n";
+        cout << "4. Remover Ultimo\n";
+        cout << "5. Remover por ID\n";
+        cout << "6. Buscar por ID\n";
+        cout << "7. Imprimir Todos\n";
+        cout << "8. Voltar\n";
+        cout << "Escolha: ";
+        cin >> opcao;
+        limparBuffer();
+
+        switch (opcao) {
+            case 1: {
+                int tipo; cout << "1. Aluno\n2. Professor\nEscolha: "; cin >> tipo; limparBuffer();
+                Elemento* e = criarElementoComIdValido(tipo);
+                listaDupEnc.inserirNoInicio(e);
+                cout << "Inserido com sucesso!\n";
+                break;
+            }
+            case 2: {
+                int tipo; cout << "1. Aluno\n2. Professor\nEscolha: "; cin >> tipo; limparBuffer();
+                Elemento* e = criarElementoComIdValido(tipo);
+                listaDupEnc.inserirNoFim(e);
+                cout << "Inserido com sucesso!\n";
+                break;
+            }
+            case 3:
+                listaDupEnc.removerPrimeiro();
+                cout << "Primeiro elemento removido (se existir).\n";
+                break;
+            case 4:
+                listaDupEnc.removerUltimo();
+                cout << "Ultimo elemento removido (se existir).\n";
+                break;
+            case 5: {
+                long id; cout << "ID para remover: "; cin >> id; limparBuffer();
+                if (listaDupEnc.removerPeloId(id)) cout << "Removido com sucesso!\n";
+                else cout << "ID nao encontrado!\n";
+                break;
+            }
+            case 6: {
+                long id; cout << "ID para buscar: "; cin >> id; limparBuffer();
+                Elemento* elem = listaDupEnc.buscarPeloId(id);
+                if (elem) elem->imprimirInfo();
+                else cout << "ID nao encontrado!\n";
+                break;
+            }
+            case 7:
+                cout << "--- Elementos na Lista ---\n";
+                listaDupEnc.imprimirTodos();
+                break;
+            case 8: break;
+            default: cout << "Opcao Invalida!\n";
+        }
+        if (opcao != 8) {
+            cout << "\nPressione Enter para continuar...";
+            cin.get();
+        }
+    } while (opcao != 8);
+}
+
+void menuListaDuplamenteEncadeadaCircular() {
+    int opcao;
+    do {
+        system("cls || clear");
+        cout << "========== LISTA DUPLAMENTE ENCADEADA CIRCULAR ==========\n";
+        // As opções são as mesmas
+        cout << "1. Inserir no Inicio\n";
+        cout << "2. Inserir no Fim\n";
+        cout << "3. Remover Primeiro\n";
+        cout << "4. Remover Ultimo\n";
+        cout << "5. Remover por ID\n";
+        cout << "6. Buscar por ID\n";
+        cout << "7. Imprimir Todos\n";
+        cout << "8. Voltar\n";
+        cout << "Escolha: ";
+        cin >> opcao;
+        limparBuffer();
+
+        // A lógica é a mesma, mas chama os métodos do objeto 'listaDupEncCirc'
+        switch (opcao) {
+            case 1: {
+                int tipo; cout << "1. Aluno\n2. Professor\nEscolha: "; cin >> tipo; limparBuffer();
+                Elemento* e = criarElementoComIdValido(tipo);
+                listaDupEncCirc.inserirNoInicio(e);
+                cout << "Inserido com sucesso!\n";
+                break;
+            }
+            case 2: {
+                int tipo; cout << "1. Aluno\n2. Professor\nEscolha: "; cin >> tipo; limparBuffer();
+                Elemento* e = criarElementoComIdValido(tipo);
+                listaDupEncCirc.inserirNoFim(e);
+                cout << "Inserido com sucesso!\n";
+                break;
+            }
+            case 3:
+                listaDupEncCirc.removerPrimeiro();
+                cout << "Primeiro elemento removido (se existir).\n";
+                break;
+            case 4:
+                listaDupEncCirc.removerUltimo();
+                cout << "Ultimo elemento removido (se existir).\n";
+                break;
+            case 5: {
+                long id; cout << "ID para remover: "; cin >> id; limparBuffer();
+                if (listaDupEncCirc.removerPeloId(id)) cout << "Removido com sucesso!\n";
+                else cout << "ID nao encontrado!\n";
+                break;
+            }
+            case 6: {
+                long id; cout << "ID para buscar: "; cin >> id; limparBuffer();
+                Elemento* elem = listaDupEncCirc.buscarPeloId(id);
+                if (elem) elem->imprimirInfo();
+                else cout << "ID nao encontrado!\n";
+                break;
+            }
+            case 7:
+                cout << "--- Elementos na Lista Circular ---\n";
+                listaDupEncCirc.imprimirTodos();
+                break;
+            case 8: break;
+            default: cout << "Opcao Invalida!\n";
+        }
+        if (opcao != 8) {
+            cout << "\nPressione Enter para continuar...";
+            cin.get();
+        }
+    } while (opcao != 8);
+}
+
+
 
 int main() {
     menuPrincipal();
