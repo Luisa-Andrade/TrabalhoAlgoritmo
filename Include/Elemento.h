@@ -15,12 +15,6 @@ public:
     int getID() const {             
         return id;
     }
-
-    // Método para alteração: permite alterar o ID de um elemento.
-    void setID(int novoId) {
-        id = novoId;
-    }
-
     
     // Método virtual puro — obriga as classes filhas a implementarem sua própria versão.
     virtual void imprimirInfo() const = 0;

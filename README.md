@@ -1,21 +1,112 @@
-# Trabalho de Programação Orientada a Objetos
+# Trabalho de Algoritmos e Estruturas de Dados - Programação Orientada a Objetos
 
-## Objetivo
+### Universidade do Estado do Rio de Janeiro
+### IPRJ
 
-Este trabalho visa a aplicação prática dos quatro pilares da Programação Orientada a Objetos (Abstração, Encapsulamento, Herança e Polimorfismo) na implementação de estruturas de dados clássicas em C++. O sistema implementado é coeso, reutilizável e robusto, seguindo boas práticas da orientação a objetos.
+## Grupo
+
+Aluna: Luisa de Andrade Lacave
+GitHub: Luisa-Andrade
 
 ---
 
-## Estrutura do Projeto
+## Professor
 
-- `include/` — arquivos `.h` contendo as declarações das classes.
-- `src/` — arquivos `.cpp` com as implementações.
+Rodrigo Mafort
+
+---
+
+## Objetivo
+
+Este trabalho visa a aplicação prática dos quatro pilares da Programação Orientada a Objetos (Abstração, Encapsulamento, Herança e Polimorfismo) na implementação de estruturas de dados em C++. O sistema implementado busca coesão, ser reutilizável e seguir as boas práticas da orientação a objetos.
+
+---
+
+## Estrutura Utilizada no Projeto
+
+- `include/` — arquivos `.h` que contém as declarações das classes.
+- `src/` — arquivos `.cpp` contendo as implementações.
 - `main.cpp` — programa principal para testes e demonstração.
 - `README.md` — documentação do projeto.
 
 ---
 
+## 🛠️ Instruções de Compilação e Execução
+
+Para o projeto, utilizamos do VsCode e para sua compilação utilizamos o compilador `g++`. 
+
+O comando utilizado foi:
+
+```bash
+g++ -std=c++11 main.cpp src/*.cpp -Iinclude -o app.exe
+```
+
+Que cria o arquivo app.exe e executando ele:
+
+```bash
+app.exe
+```
+
+Temos a execução do trabalho e suas funcionalidades.
+
+Com isso podemos seguir as aplicações do trabalho.
+
+---
+
 ## Parte I — Implementações com Alocação Sequencial
+
+## Classe Abstrata de nome `Elemento`
+
+A classe `Elemento` foi criada para servir como a base abstrata para todos os tipos de dados que serão armazenados nas estruturas. Essa decisão segue o princípio da **abstração**, definindo assim um modelo em comum para os elementos que fazem parte de: listas, filas, pilhas e as outras estruturas presentes no projeto.
+
+As classes que herdam de `Elemento`, que são as classes derivadas, nomeamos de `Aluno` e `Professor`, que representam tipos distintos de dados que as estruturas devem armazenar e manipular.
+
+### Motivação e Objetivo
+
+De acordo com a proposta do trabalho é necessário uma hierarquia de classes para representar os elementos armazenados e que essa hierarquia comece com uma classe abstrata, aquela que chamamos de `Elemento`. Essa classe deve conter:
+
+- Um **atributo protegido `id`**, funcionando como chave primária para cada elemento;
+- Um **método público `getID()`**, única forma de acesso externo ao identificador;
+- Ao menos um **método virtual puro**, para garantir que as classes derivadas implementem seu próprio comportamento.
+
+As classes derivadas (`Aluno` e `Professor`), implementam esse modelo, adicionando atributos e comportamentos específicos, como nome, matrícula e área de atuação, além de suas próprias versões do método `imprimirInfo()`.
+
+---
+
+### Decisões de Projeto
+
+- A classe foi definida como **abstrata** por meio de um método virtual puro `imprimirInfo() const`, que força as subclasses a implementarem sua própria forma de exibir informações específicas do tipo de dado que representam.
+- O atributo `id` foi declarado como `protected`, restringindo o acesso direto e promovendo o **encapsulamento**.
+- O método `getID()` foi implementado como a única forma de obter o valor do ID, conforme pedido no enunciado.
+- As classes `Aluno` e `Professor` estendem `Elemento`, cada uma com seus atributos próprios (como nome e matrícula para `Aluno`, nome e área para `Professor`), respeitando o princípio da **herança**.
+
+---
+
+### Relacionamento com Outros Componentes
+
+A classe `Elemento` será herdada por todas as classes concretas que representam dados nas estruturas. Isso permite que listas, filas, pilhas e árvores possam armazenar diferentes tipos de objetos — como instâncias de `Aluno` e `Professor` —, mas tratá-los de forma genérica via ponteiros ou referências para `Elemento`, utilizando **polimorfismo** para acessar métodos como `imprimirInfo()`.
+
+Essa abordagem utilizada fortalece a coesão do sistema e promove a **reutilização de código**, permitindo que as estruturas operem sobre qualquer classe derivada sem necessidade de conhecer sua implementação específica.
+
+---
+
+### Complexidade dos Métodos
+
+| Método           | Complexidade | Observação                                              |
+|------------------|--------------|----------------------------------------------------------|
+| `getID()`        | O(1)         | Acesso direto ao valor armazenado em memória.            |
+| `imprimirInfo()` | -            | Método virtual puro — sua complexidade depende da implementação em `Aluno` e `Professor`. |
+
+---
+
+### Conformidade com os Requisitos do Enunciado
+
+- [x] Classe abstrata com método virtual puro.
+- [x] Atributo `id` protegido, acessado apenas via método público.
+- [x] Compatível com uso em estruturas genéricas baseadas em ponteiros para `Elemento`.
+- [x] Garante polimorfismo em chamadas como `imprimirInfo()` em listas e outras estruturas, permitindo que objetos das classes `Aluno` e `Professor` sejam tratados individualmente.
+
+
 
 ### Hierarquia Elemento
 

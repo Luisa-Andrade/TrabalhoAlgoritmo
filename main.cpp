@@ -222,7 +222,7 @@ void menuListaNaoOrdenada() {
                 cin >> id;
                 limparBuffer();
 
-                if(!lnao.buscarPeloId(id)) {
+                if (!lnao.buscarPeloId(id)) {
                     cout << "ID não encontrado!\n";
                     break;
                 }
@@ -232,10 +232,36 @@ void menuListaNaoOrdenada() {
                 cin >> tipo;
                 limparBuffer();
 
-                Elemento* novo = criarElementoComIdValido(tipo);
-                novo->setID(id);  // mantém o mesmo ID
+                Elemento* novo = nullptr;
 
-                if(lnao.alterarPeloId(id, novo)) {
+                if (tipo == 1) {
+                    string nome;
+                    int matricula;
+
+                    cout << "Nome: ";
+                    getline(cin, nome);
+                    cout << "Matrícula: ";
+                    cin >> matricula;
+                    limparBuffer();
+
+                    novo = new Aluno(id, nome, matricula);
+
+                } else if (tipo == 2) {
+                    string nome, area;
+
+                    cout << "Nome: ";
+                    getline(cin, nome);
+                    cout << "Área: ";
+                    getline(cin, area);
+
+                    novo = new Professor(id, nome, area);
+
+                } else {
+                    cout << "Tipo inválido!\n";
+                    break;
+                }
+
+                if (lnao.alterarPeloId(id, novo)) {
                     cout << "Alterado com sucesso!\n";
                 } else {
                     cout << "Falha ao alterar!\n";
