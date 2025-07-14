@@ -1,11 +1,13 @@
 # Trabalho de Algoritmos e Estruturas de Dados - Programação Orientada a Objetos
 
 Universidade do Estado do Rio de Janeiro
+
 IPRJ
 
 ## Grupo
 
 Aluna: Luisa de Andrade Lacave
+
 GitHub: Luisa-Andrade
 
 ---
@@ -61,6 +63,8 @@ A classe `Elemento` foi criada para servir como a base abstrata para todos os ti
 
 As classes que herdam de `Elemento`, que são as classes derivadas, nomeamos de `Aluno` e `Professor`, que representam tipos distintos de dados que as estruturas devem armazenar e manipular.
 
+---
+
 ### Motivação e Objetivo
 
 De acordo com a proposta do trabalho é necessário uma hierarquia de classes para representar os elementos armazenados e que essa hierarquia comece com uma classe abstrata, aquela que chamamos de `Elemento`. Essa classe deve conter:
@@ -106,7 +110,7 @@ Essa abordagem utilizada fortalece a coesão do sistema e promove a **reutiliza�
 - [x] Compatível com uso em estruturas genéricas baseadas em ponteiros para `Elemento`.
 - [x] Garante polimorfismo em chamadas como `imprimirInfo()` em listas e outras estruturas, permitindo que objetos das classes `Aluno` e `Professor` sejam tratados individualmente.
 
-
+---
 
 ### Hierarquia Elemento
 
