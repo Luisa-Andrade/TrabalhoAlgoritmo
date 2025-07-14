@@ -189,6 +189,17 @@ Essas classes servem para demonstrar o polimorfismo e armazenamento heterogêneo
 
 ## Parte II — Implementações com Alocação Encadeada
 
+## Arvore Binaria de Busca
+A Arvore Binaria de Busca foi implementada para manter os elementos ordenados com base no ID, garantindo buscas, inserções e remoções eficientes com uma entrada de dados equeilibrados. Assim como requerido, a classe "No" da árvore é privada e inacessível ao usuário final.  As operações foram implementadas de forma recursiva.
+
+Complexidade dos Metodos Utilizados:
+
+| Método           | Complexidade | Observação                                              |
+|------------------|--------------|----------------------------------------------------------|
+| `Inserir,BuscarPeloId,RemoverPeloId`        | O(log n) Caso medio        | Pior caso seria O(n), em caso da arvore perder sua forma devido a uma possivel lista já ordenada.         |
+| `emOrdem,preOrdem,pósOrdem` | O(n)            | Isso devido a necessidade de visitar todos os nós da arvore para tal. |
+|
+
 *(Ainda não implementado — pode ser estendido conforme requisitos futuros)*
 
 ---
@@ -222,5 +233,8 @@ Essas classes servem para demonstrar o polimorfismo e armazenamento heterogêneo
 |                    | Desenfileirar      | O(n)          |
 | Fila Circular       | Enfileirar         | O(1)          |
 |                    | Desenfileirar      | O(1)          |
+| Arvore Binaria     | Inserir            | O(log n)      |
+| de Busca           | Buscar pelo ID     | O(log n)      |
+|                    | Remover pelo ID    | O(log n)      |
 
 ---

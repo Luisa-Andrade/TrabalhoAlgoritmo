@@ -1,4 +1,4 @@
-#include "Arvore_Binaria.h"
+#include "ArvoreBinariaBusca.h"
 #include <iostream>
 
 // --- Construtor e Destrutor
@@ -13,8 +13,8 @@ void ArvoreBinariaBusca::destruir(No* no) {
     if (no) {
         destruir(no->esquerda);
         destruir(no->direita);
-        delete no->dado; // Libera o objeto Elemento.
-        delete no;       // Libera o no da arvore.
+        delete no->dado; //Libera o objeto Elemento.
+        delete no;       //Libera o no da arvore.
     }
 }
 
