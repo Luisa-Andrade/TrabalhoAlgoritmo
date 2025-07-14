@@ -10,6 +10,7 @@
 #include "include/ListaSimplesmenteEncadeada.h" 
 #include "include/ListaDuplamenteEncadeada.h"        
 #include "include/ListaDuplamenteEncadeadaCircular.h" 
+#include "include/ArvoreBinariaBusca.h"
 #include <iostream>
 #include <limits>
 #include <string>
@@ -30,6 +31,8 @@ ListaSimplesmenteEncadeada listaSenc;
 ListaDuplamenteEncadeada listaDupEnc;             
 ListaDuplamenteEncadeadaCircular listaDupEncCirc;
 
+ArvoreBinariaBusca arvore;
+
 
 
 // Protótipos
@@ -40,6 +43,7 @@ void menuListaOrdenada();
 void menuPilha();
 void menuFila();
 bool idExiste(int id);
+void menuArvoreBinaria();
 Elemento* criarElementoComIdValido(int tipo);
 
 void menuEncadeadas();
@@ -653,7 +657,8 @@ void menuEncadeadas() {
         cout << "3. Lista Simplesmente Encadeada\n";
         cout << "4. Lista Duplamente Encadeada\n";        
         cout << "5. Lista Duplamente Encadeada Circular\n"; 
-        cout << "6. Voltar\n";
+        cout << "6. Arvore Binaria de Busca\n";
+        cout << "7. Voltar\n";
         cout << "Escolha uma opcao: ";
         cin >> opcao;
         limparBuffer();
@@ -664,7 +669,8 @@ void menuEncadeadas() {
             case 3: menuListaSimplesmenteEncadeada(); break; 
             case 4: menuListaDuplamenteEncadeada(); break;        
             case 5: menuListaDuplamenteEncadeadaCircular(); break; 
-            case 6: break;
+            case 6: menuArvoreBinaria(); break;
+            case 7: break;
             default: cout << "Opcao invalida!\n";
         }
     } while(opcao != 4);
@@ -974,6 +980,110 @@ void menuListaDuplamenteEncadeadaCircular() {
             cin.get();
         }
     } while (opcao != 8);
+}
+
+// Esta função vai para o seu arquivo main.cpp
+
+void menuArvoreBinaria() {
+    int opcao;
+    do {
+        system("cls || clear");
+        cout << "========== ÁRVORE BINÁRIA DE BUSCA ==========\n";
+        cout << "1. Inserir\n";
+        cout << "2. Remover por ID\n";
+        cout << "3. Buscar por ID\n";
+        cout << "4. Imprimir em Ordem (In-Order)\n";
+        cout << "5. Imprimir em Pré-Ordem (Pre-Order)\n";
+        cout << "6. Imprimir em Pós-Ordem (Post-Order)\n";
+        cout << "7. Voltar\n";
+        cout << "Escolha uma opção: ";
+        cin >> opcao;
+        limparBuffer();
+
+        switch(opcao) {
+            case 1: {
+                int tipo;
+                cout << "1. Aluno\n2. Professor\nEscolha o tipo de elemento: ";
+                cin >> tipo;
+                limparBuffer();
+
+                // MELHORIA: Corrigido o nome da função para o padrão do projeto.
+                Elemento* e = criarElementoComIdValido(tipo); 
+                arvore.Inserir(e);
+
+                cout << "Elemento inserido com sucesso na árvore!\n";
+                break;
+            }
+            case 2: {
+                long id;
+                cout << "ID para remover: ";
+                cin >> id;
+                limparBuffer();
+
+                // A lógica de buscar primeiro para dar um feedback mais claro é boa.
+                if (arvore.BuscarPeloId(id)) {
+                    arvore.RemoverPeloId(id);
+                    cout << "Elemento com ID " << id << " removido (ou sua substituição ocorreu).\n";
+                } else {
+                    cout << "ID não encontrado na árvore!\n";
+                }
+                break;
+            }
+            case 3: {
+                long id;
+                cout << "ID para buscar: ";
+                cin >> id;
+                limparBuffer();
+                
+                if (const Elemento* elem = arvore.BuscarPeloId(id)) {
+                    cout << "Elemento encontrado:\n";
+                    elem->imprimirInfo();
+                } else {
+                    cout << "Elemento não encontrado!\n";
+                }
+                break;
+            }
+            case 4: {
+                // MELHORIA: Verifica se a árvore está vazia antes de imprimir.
+                cout << "--- Percurso Em Ordem (In-Order) ---\n";
+                if (arvore.estaVazia()) {
+                    cout << "A árvore está vazia.\n";
+                } else {
+                    arvore.emOrdem();
+                }
+                break;
+            }
+            case 5: {
+                // MELHORIA: Verifica se a árvore está vazia antes de imprimir.
+                cout << "--- Percurso Pré-Ordem (Pre-Order) ---\n";
+                if (arvore.estaVazia()) {
+                    cout << "A árvore está vazia.\n";
+                } else {
+                    arvore.preOrdem();
+                }
+                break;
+            }
+            case 6: {
+                // MELHORIA: Verifica se a árvore está vazia antes de imprimir.
+                cout << "--- Percurso Pós-Ordem (Post-Order) ---\n";
+                if (arvore.estaVazia()) {
+                    cout << "A árvore está vazia.\n";
+                } else {
+                    arvore.posOrdem();
+                }
+                break;
+            }
+            case 7:
+                break;
+            default:
+                cout << "Opção inválida!\n";
+        }
+
+        if(opcao != 7) {
+            cout << "\nPressione Enter para continuar...";
+            cin.get();
+        }
+    } while(opcao != 7);
 }
 
 
