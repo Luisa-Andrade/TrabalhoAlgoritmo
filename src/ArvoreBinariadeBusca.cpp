@@ -1,7 +1,7 @@
 #include "ArvoreBinariaBusca.h"
 #include <iostream>
 
-// --- Construtor e Destrutor
+//Construtor e Destrutor
 
 ArvoreBinariaBusca::ArvoreBinariaBusca() : raiz(nullptr) {}
 
@@ -14,7 +14,7 @@ void ArvoreBinariaBusca::destruir(No* no) {
         destruir(no->esquerda);
         destruir(no->direita);
         delete no->dado; //Libera o objeto Elemento.
-        delete no;       //Libera o no da arvore.
+        delete no;       //Libera o "nó" da arvore.
     }
 }
 
@@ -32,7 +32,7 @@ void ArvoreBinariaBusca::RemoverPeloId(int id) {
     removerPeloId(raiz, id);
 }
 
-//Metodos de Percurso Publicos
+//Metodos de Percurso 
 
 void ArvoreBinariaBusca::emOrdem() const {
     std::cout << "Percurso emOrdem: [ ";
@@ -53,7 +53,7 @@ void ArvoreBinariaBusca::posOrdem() const {
 }
 
 
-//Implementacoes Recursivas Privadas
+//Implementacao Recursivas 
 
 void ArvoreBinariaBusca::inserir(No*& no, Elemento* elemento) {
     if (!no) {
@@ -63,12 +63,11 @@ void ArvoreBinariaBusca::inserir(No*& no, Elemento* elemento) {
     } else if (elemento->getID() > no->dado->getID()) {
         inserir(no->direita, elemento);
     }
-    // Nota: IDs duplicados sao ignorados nesta implementacao.
 }
 
 Elemento* ArvoreBinariaBusca::buscarPeloId(No* no, int id) const {
     if (!no) {
-        return nullptr; // Nao encontrado
+        return nullptr; //Dado não encontrado
     }
 
     if (id < no->dado->getID()) {
@@ -76,43 +75,42 @@ Elemento* ArvoreBinariaBusca::buscarPeloId(No* no, int id) const {
     } else if (id > no->dado->getID()) {
         return buscarPeloId(no->direita, id);
     } else {
-        return no->dado; // Encontrado
+        return no->dado; //Dado encontrado
     }
 }
 
 void ArvoreBinariaBusca::removerPeloId(No*& no, int id) {
-    if (!no) return; // Elemento nao esta na arvore
+    if (!no) return; //O Elemento nao esta na arvore
 
     if (id < no->dado->getID()) {
         removerPeloId(no->esquerda, id);
     } else if (id > no->dado->getID()) {
         removerPeloId(no->direita, id);
-    } else { // Encontrou o no a ser removido
-        if (!no->esquerda) { // Caso 1: Sem filho a esquerda
+    } else { //Encontra o "nó" a ser removido
+        if (!no->esquerda) { //Caso 1: Sem filho a esquerda
             No* temp = no;
             no = no->direita;
             delete temp->dado;
             delete temp;
-        } else if (!no->direita) { // Caso 2: Sem filho a direita
+        } else if (!no->direita) { //Caso 2: Sem filho a direita
             No* temp = no;
             no = no->esquerda;
             delete temp->dado;
             delete temp;
         } else { // Caso 3: Com dois filhos
             No* sucessor = encontrarMinimo(no->direita);
-            // Troca os dados do no atual com os do sucessor
-            // Primeiro, deletamos o dado antigo do no que sera "removido"
+            //Troca os dados do "nó" atual com os do sucessor
+            //Deletamos o dado antigo do "nó" que sera removido
             delete no->dado;
-            // O no atual agora aponta para o dado do sucessor
+            //O"nó" atual agora aponta para o dado do sucessor
             no->dado = sucessor->dado;
-            // Agora, removemos o no sucessor, que agora contem um dado duplicado
-            // e e mais facil de remover. Precisamos evitar que seu dado seja deletado duas vezes.
-            // Para isso, a recursao de remocao precisa ser ajustada.
-            // Uma abordagem mais segura:
-            // Trocar ponteiros de dados e remover o sucessor
+            //Agora, removemos o "nó" sucessor, que agora contem um dado duplicado
+            //e é mais facil de remover, temos que evitar que seu dado seja deletado duas vezes.
+            //Para tal, utilizaremos a recursão de remocao que precisa ser ajustada.
+
             Elemento* dadoSucessor = sucessor->dado;
-            sucessor->dado = nullptr; // Evita dupla liberacao de memoria
-            delete no->dado; // Libera o dado original
+            sucessor->dado = nullptr; //Evita dupla liberacao de memoria
+            delete no->dado; //Libera o dado original
             no->dado = dadoSucessor;
             removerPeloId(no->direita, sucessor->dado->getID());
         }
@@ -120,7 +118,7 @@ void ArvoreBinariaBusca::removerPeloId(No*& no, int id) {
 }
 
 
-// Funcao auxiliar para encontrar o menor no em uma sub-arvore (o mais a esquerda)
+//Funcao auxiliar para encontrar o menor no em uma sub-arvore (o mais a esquerda)
 ArvoreBinariaBusca::No* ArvoreBinariaBusca::encontrarMinimo(No* no) {
     while (no && no->esquerda != nullptr) {
         no = no->esquerda;
@@ -128,7 +126,8 @@ ArvoreBinariaBusca::No* ArvoreBinariaBusca::encontrarMinimo(No* no) {
     return no;
 }
 
-// Implementacao dos percursos recursivos privados
+//Implementacao dos percursos
+
 void ArvoreBinariaBusca::emOrdem(No* no) const {
     if (no) {
         emOrdem(no->esquerda);
