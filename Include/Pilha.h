@@ -5,14 +5,16 @@
 
 class Pilha {
 private:
-    ListaNaoOrdenada lista; // composição com lista não ordenada
+    ListaNaoOrdenada lista; // Composição (uso interno apenas)
 
 public:
-    void empilhar(Elemento* e);
-    void desempilhar();
-    Elemento* consultarTopo() const;
+    // Métodos principais
+    bool empilhar(Elemento* e);          // Retorna sucesso/falha
+    bool desempilhar();                  // Retorna sucesso/falha
+    const Elemento* consultarTopo() const; // Retorno const (segurança)
     bool pilhaVazia() const;
     bool pilhaCheia() const;
+    Elemento* removerTopoSemDeletar();
 };
 
 #endif

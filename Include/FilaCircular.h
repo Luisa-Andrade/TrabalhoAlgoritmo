@@ -1,8 +1,8 @@
+// FilaCircular.h
 #ifndef FILACIRCULAR_H
 #define FILACIRCULAR_H
 
 #include "Elemento.h"
-#include <iostream>
 
 class FilaCircular {
 private:
@@ -15,12 +15,12 @@ public:
     FilaCircular();
     ~FilaCircular();
 
-    void enfileirar(Elemento* e);     // O(1)
-    void desenfileirar();             // O(1)
-    Elemento* frente() const;         // O(1)
-    bool vazia() const;               // O(1)
-    bool cheia() const;               // O(1)
-    void imprimirTodos() const;       // O(n)
+    bool enfileirar(Elemento* e);     // Retorna false se falhar
+    bool desenfileirar();             // Retorna false se falhar
+    const Elemento* frente() const;   // Retorno const
+    bool vazia() const;
+    bool cheia() const;
+    void imprimirTodos() const;
 };
 
 #endif

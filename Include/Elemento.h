@@ -14,6 +14,10 @@ public:
         return id;
     }
 
+    void setID(int novoId) {
+        id = novoId;
+    }
+
     // Método virtual puro obriga as classes filhas a implementarem
     virtual void imprimirInfo() const = 0;
 };

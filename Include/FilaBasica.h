@@ -8,10 +8,12 @@ private:
     ListaNaoOrdenada lista;
 
 public:
-    void enfileirar(Elemento* e);
-    void desenfileirar();
-    Elemento* frente() const;
+    bool enfileirar(Elemento* e);      // Retorna false se falhar
+    bool desenfileirar();              // Retorna false se falhar
+    const Elemento* frente() const;    // Retorno const
     bool vazia() const;
+    bool cheia() const;
+    void imprimirTodos() const;
 };
 
 #endif

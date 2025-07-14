@@ -1,28 +1,43 @@
+// FilaCircular.cpp
 #include "FilaCircular.h"
+#include <iostream>
 
 FilaCircular::FilaCircular() : inicio(0), fim(0), tamanho(0) {}
 
 FilaCircular::~FilaCircular() {
+    // Libera memória dos elementos restantes
     while (!vazia()) {
         desenfileirar();
     }
 }
 
-void FilaCircular::enfileirar(Elemento* e) {
-    if (cheia()) return;
+bool FilaCircular::enfileirar(Elemento* e) {
+    if (cheia() || e == nullptr) return false;
+
+    // Verifica se já existe elemento com mesmo ID
+    for (int i = 0; i < tamanho; ++i) {
+        int index = (inicio + i) % 100;
+        if (elementos[index]->getID() == e->getID()) {
+            return false; // ID duplicado, falha na inserção
+        }
+    }
+
     elementos[fim] = e;
     fim = (fim + 1) % 100;
     tamanho++;
+    return true;
 }
 
-void FilaCircular::desenfileirar() {
-    if (vazia()) return;
+bool FilaCircular::desenfileirar() {
+    if (vazia()) return false;
+
     delete elementos[inicio];
     inicio = (inicio + 1) % 100;
     tamanho--;
+    return true;
 }
 
-Elemento* FilaCircular::frente() const {
+const Elemento* FilaCircular::frente() const {
     if (vazia()) return nullptr;
     return elementos[inicio];
 }
@@ -36,8 +51,13 @@ bool FilaCircular::cheia() const {
 }
 
 void FilaCircular::imprimirTodos() const {
+    if (vazia()) {
+        std::cout << "Fila vazia!\n";
+        return;
+    }
+    std::cout << "====== ELEMENTOS NA FILA CIRCULAR ======\n";
     for (int i = 0; i < tamanho; ++i) {
-        int indice = (inicio + i) % 100;
-        elementos[indice]->imprimirInfo();
+        int index = (inicio + i) % 100;
+        elementos[index]->imprimirInfo();
     }
 }
