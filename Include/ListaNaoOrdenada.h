@@ -5,28 +5,34 @@
 
 class ListaNaoOrdenada {
 private:
-    Elemento* elementos[100];  // Array estático (capacidade 100)
-    int tamanho = 0;           // Tamanho atual
+    Elemento* elementos[100]; 
+    int tamanho = 0;           
 
 public:
-    ~ListaNaoOrdenada();
+    ~ListaNaoOrdenada();  // liberar memória dos elementos
 
-    // Métodos de inserção/remoção
-    bool inserirNoInicio(Elemento* e);            // O(n)
-    bool inserirNoFinal(Elemento* e);             // O(1)
-    bool removerPrimeiro();                       // O(n)
-    bool removerUltimo();                         // O(1)
-    bool removerPeloId(int id);                   // O(n)
-    const Elemento* buscarPeloId(int id) const;   // O(n) - Retorno const
-    bool alterarPeloId(int id, Elemento* novo);   // O(n)
-
-    // Métodos auxiliares
-    void imprimirTodos() const;                   // O(n)
-    int getTamanho() const { return tamanho; }    // O(1)
-    const Elemento* getPrimeiro() const;          // O(1) - Retorno const
-    const Elemento* getUltimo() const;            // O(1) - Retorno const
-    bool estaCheia() const { return tamanho >= 100; } // O(1)
-    bool estaVazia() const { return tamanho == 0; }   // O(1)
+    //  Métodos de Inserção 
+    bool inserirNoInicio(Elemento* e);  // Adiciona no começo (custo O(n) - deslocamento)
+    bool inserirNoFinal(Elemento* e);   // Adiciona no final (custo O(1) - direto)
+    
+    //  Métodos de Remoção 
+    bool removerPrimeiro();             // Remove primeiro elemento (O(n) - deslocamento)
+    bool removerUltimo();               // Remove último elemento (O(1) - direto)
+    bool removerPeloId(int id);         // Remove por ID (O(n) - busca + deslocamento)
+    
+    //  Métodos de Busca/Modificação 
+    const Elemento* buscarPeloId(int id) const;  // Busca elemento por ID (O(n))
+    bool alterarPeloId(int id, Elemento* novo);  // Substitui elemento por ID (O(n))
+    
+    //  Métodos Auxiliares 
+    void imprimirTodos() const;                     // Imprime todos elementos
+    int getTamanho() const { return tamanho; }      // Retorna quantidade atual
+    const Elemento* getPrimeiro() const;            // Acessa primeiro elemento
+    const Elemento* getUltimo() const;              // Acessa último elemento
+    bool estaCheia() const { return tamanho >= 100; }  // Verifica capacidade máxima
+    bool estaVazia() const { return tamanho == 0; }    // Verifica lista vazia
+    
+    // Remove último SEM destruir o objeto
     Elemento* removerUltimoSemDeletar();
 };
 
