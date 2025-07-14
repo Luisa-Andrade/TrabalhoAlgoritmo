@@ -57,7 +57,7 @@ Com isso podemos seguir as aplicações do trabalho.
 
 ## Parte I — Implementações com Alocação Sequencial
 
-## Classe Abstrata de nome `Elemento`
+### Classe Abstrata de nome `Elemento`
 
 A classe `Elemento` foi criada para servir como a base abstrata para todos os tipos de dados que serão armazenados nas estruturas. Essa decisão segue o princípio da **abstração**, definindo assim um modelo em comum para os elementos que fazem parte de: listas, filas, pilhas e as outras estruturas presentes no projeto.
 
@@ -79,9 +79,9 @@ As classes derivadas (`Aluno` e `Professor`), implementam esse modelo, adicionan
 
 ### Decisões de Projeto
 
-- A classe foi definida como **abstrata** por meio de um método virtual puro `imprimirInfo() const`, que força as subclasses a implementarem sua própria forma de exibir informações específicas do tipo de dado que representam.
-- O atributo `id` foi declarado como `protected`, restringindo o acesso direto e promovendo o **encapsulamento**.
-- O método `getID()` foi implementado como a única forma de obter o valor do ID, conforme pedido no enunciado.
+- A classe foi definida como **abstrata** por meio de um método virtual puro `imprimirInfo() const`, que força as subclasses a implementarem sua própria forma de exibir informações específicas do tipo de dado que representa;
+- O atributo `id` foi declarado como `protected`, restringindo o acesso direto e promovendo o **encapsulamento**;
+- O método `getID()` foi implementado como a única forma de obter o valor do ID, conforme pedido no enunciado;
 - As classes `Aluno` e `Professor` estendem `Elemento`, cada uma com seus atributos próprios (como nome e matrícula para `Aluno`, nome e área para `Professor`), respeitando o princípio da **herança**.
 
 ---
@@ -105,22 +105,25 @@ Essa abordagem utilizada fortalece a coesão do sistema e promove a **reutiliza�
 
 ### Conformidade com os Requisitos do Enunciado
 
-- [x] Classe abstrata com método virtual puro.
-- [x] Atributo `id` protegido, acessado apenas via método público.
-- [x] Compatível com uso em estruturas genéricas baseadas em ponteiros para `Elemento`.
+- [x] Classe abstrata com método virtual puro;
+- [x] Atributo `id` protegido, acessado apenas via método público;
+- [x] Compatível com uso em estruturas genéricas baseadas em ponteiros para `Elemento`;
 - [x] Garante polimorfismo em chamadas como `imprimirInfo()` em listas e outras estruturas, permitindo que objetos das classes `Aluno` e `Professor` sejam tratados individualmente.
 
 ---
 
+## FAZER ALTERAÇÕES DAQUI PRA BAIXO!!!!
+
+
 ### Hierarquia Elemento
 
 - **Elemento** (classe abstrata)
-  - Atributo protegido `id` (tipo `int`)
-  - Método público `getID() const`
-  - Método virtual puro `imprimirInfo() const = 0` para obrigar implementação em classes concretas
+  - Atributo protegido `id` (tipo `int`);
+  - Método público `getID() const`;
+  - Método virtual puro `imprimirInfo() const = 0` para obrigar implementação em classes concretas.
 - Classes concretas que herdam de Elemento:
-  - **Aluno** — atributos: `nome`, `matricula`
-  - **Professor** — atributos: `nome`, `area`
+  - **Aluno** — atributos: `nome`, `matricula`;
+  - **Professor** — atributos: `nome`, `area`.
 
 Essas classes servem para demonstrar o polimorfismo e armazenamento heterogêneo nas estruturas de dados.
 
@@ -221,9 +224,3 @@ Essas classes servem para demonstrar o polimorfismo e armazenamento heterogêneo
 |                    | Desenfileirar      | O(1)          |
 
 ---
-
-## Como Compilar e Executar
-
-```bash
-g++ -std=c++11 main.cpp src/*.cpp -Iinclude -o trabalhoPOO
-./trabalhoPOO
